@@ -31,12 +31,10 @@ stages:
         arguments: 
           westus2
           test-slalom-rg
-    - task: AzurePowerShell@4
+    - task: AzureCLI@1
       inputs:
         azureSubscription: Slalom
-        scriptType: FilePath
-        scriptPath: $(Build.SourcesDirectory)/infrastructure/New-WebApp.ps1
-        scriptArguments:
-          -Name icornett-slalom-test
-          -ResourceGroupName test-slalom-rg
-          -Location westus2
+        scriptPath: $(Build.SourcesDirectory)/infrastructure/create_web_application.sh
+        arguments: 
+          icornett-test-pipeline
+          test-slalom-rg
