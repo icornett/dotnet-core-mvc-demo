@@ -28,7 +28,7 @@ stages:
       inputs:
         azureSubscription: Slalom
         scriptType: FilePath
-        scriptPath: infrastructure/New-WebApp.ps1
+        scriptPath: $(Build.SourcesDirectory)/infrastructure/New-WebApp.ps1
         scriptArguments:
           -Name icornett-slalom-test
           -ResourceGroupName test-slalom-rg
