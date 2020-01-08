@@ -24,9 +24,10 @@ stages:
   jobs:
   - job: Deploy_Infrastructure
     steps:
-    - task: Bash@3
+    - task: AzureCLI@1
       inputs:
-        filePath: $(Build.SourcesDirectory)/infrastructure/create_resource_group.sh
+        azureSubscription: Slalom
+        scriptPath: $(Build.SourcesDirectory)/infrastructure/create_resource_group.sh
         arguments: 
           westus2
           test-slalom-rg
