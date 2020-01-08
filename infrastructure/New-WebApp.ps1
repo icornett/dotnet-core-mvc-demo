@@ -1,14 +1,14 @@
 ﻿param
 (
-  [String]
+  [string]
   [Parameter(Mandatory)]
   $Name,
 
-  [String]
+  [string]
   [Parameter(Mandatory)]
   $ResourceGroupName,
 
-  [String]
+  [string]
   $Location = 'westus2'
 )
 
