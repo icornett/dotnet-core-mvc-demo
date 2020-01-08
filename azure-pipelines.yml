@@ -24,6 +24,7 @@ stages:
   jobs:
   - job: Deploy_Infrastructure
     steps:
+    - pwsh: Install-Module Az -Force -AllowClobber
     - task: AzurePowerShell@4
       inputs:
         azureSubscription: Slalom
