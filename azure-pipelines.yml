@@ -24,7 +24,12 @@ stages:
   jobs:
   - job: Deploy_Infrastructure
     steps:
-    - pwsh: Install-Module Az -Force -AllowClobber
+    - task: Bash@3
+      inputs:
+        filePath: $(Build.SourcesDirectory)/infrastructure/create_resource_group.sh
+        arguments: 
+          westus2
+          test-slalom-rg
     - task: AzurePowerShell@4
       inputs:
         azureSubscription: Slalom
