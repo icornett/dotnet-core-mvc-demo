@@ -1,0 +1,35 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+stages:
+- stage: Build_App
+  jobs:
+  - job: Build_Sample
+    steps:
+    - script: dotnet build --configuration $(buildConfiguration)
+      displayName: 'dotnet build $(buildConfiguration)'
+
+- stage: Build_Infrastructure
+  jobs:
+  - job: Deploy_Infrastructure
+    steps:
+    - task: AzurePowerShell@4
+      inputs:
+        azureSubscription: Slalom
+        scriptType: FilePath
+        scriptPath: infrastructure/New-WebApp.ps1
+        scriptArguments:
+          -Name icornett-slalom-test
+          -ResourceGroupName test-slalom-rg
+          -Location westus2
